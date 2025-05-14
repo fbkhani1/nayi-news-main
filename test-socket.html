@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.IO Category Test</title>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <h2>Listening for categoryCreated event...</h2>
+  <div id="output"></div>
+
+  <script>
+    const socket = io("http://localhost:5000"); // Adjust if your backend is on a different port
+
+    socket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    socket.on("categoryCreated", (data) => {
+      console.log("New category received:", data);
+      document.getElementById("output").innerHTML += `<p>${data.name} - ${data.slug}</p>`;
+    });
+  </script>
+</body>
+</html>
